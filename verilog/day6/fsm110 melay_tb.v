@@ -4,8 +4,8 @@ module mealy_110tb;
   reg reset;
   reg din;
   wire dout1;
-  logic [1:0] state;
-  logic [1:0] next;
+  wire [1:0] state;
+  wire [1:0] next;
  
   mealy_110 dut (
     .clk(clk),
@@ -16,32 +16,25 @@ module mealy_110tb;
     .next(next)
   );
   
-  initial begin
-    $dumpfile("mealy_110.vcd");
-    $dumpvars(1);
+   initial begin
+     din=1;
+    reset=1;
+    clk=1;
+    #5 reset=0;
   end
-  
   initial begin
-    clk = 0;
-    forever #5 clk = ~clk;
-  end 
-  
-  initial begin
-    din = 0;
-    reset = 1;
-    #30;
-    reset = 0;
-    #40;
-  
-    din = 1;
-    #50;
-
-    din = 1;
-    #60;
-
-    din = 0;
-    #70; 
-    $monitor("dout1 = %b din = %b clk = %b reset = %b", dout1, din, clk, reset);
-    #400 $finish;
-  end
+     #10din=1'b1;
+  #10din=1'b1;
+  #20din=1'b0;
+  #100
+    $finish();
+     
+      end
+   initial begin
+     $monitor("t=%d clk=%b reset=%b din=%b dout1=%b state=%b next=%b ",$time,clk,reset,din,dout1,state,next);
+     $dumpfile("melay_110.vcd");
+     $dumpvars(1);
+   end
+  always #10 clk=~clk;
 endmodule
+    
