@@ -8,42 +8,48 @@ module mealy_110(clk,reset,din,dout1,state,next);
   s2=2'b10;
  
 
-  always @(posedge clk or posedge reset) begin
-    if(reset) begin
-      dout1 <= 1'b0;
+  always @(posedge clk) begin
+    if(reset==1) begin
       state <= s0;
     end
-    else begin
+    else 
+       state <= next;
+  end
+  always @(state or din)
+    begin
       case(state)
         s0: begin
-          if(din) begin
-            state <= s1;
-            dout1 <=1'b0;
-          end
+          if(din)
+            begin
+            next = s1;
+            dout1 =1'b0;
+            end
           else
-            dout1 <=1'b0;
+             next = s0;
+            dout1 =1'b0;
         end
         s1: begin
-          if(din) begin
-            state <= s2;
-            dout1 <=1'b0;
-          end
-          else begin
-            state <= s0;
-            dout1 <=1'b0;
-          end
+          if(din)
+            begin
+            next = s2;
+            dout1 =1'b0;
+            end
+          else 
+            begin
+            next = s0;
+            dout1 =1'b0;
+            end
         end
         s2: begin
-          if(~din) begin
-            state <= s0;
-            dout1 <=1'b1;
-          end
-          else begin
-            dout1 <=1'b0;
-          end
+          if(~din)
+            begin
+             next = s0;
+            dout1 =1'b1;
+            end
+          else 
+            dout1 =1'b0;
         end
       endcase
-    end
+    
   end
-
 endmodule
