@@ -13,7 +13,7 @@ module jkff_tb;
       $monitor("time=0%t, j=%b k=%b clk=%b reset=%b q=%b qn=%b",$time,j,k,clk,reset,q,qn);
       clk=1;
       
-      rst=1;
+      reset=1;
       j=1'b0;k=1'b0;
       #10 reset =0;
       
