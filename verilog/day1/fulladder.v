@@ -7,7 +7,7 @@ module fulladder(
   wire x,y,z);
   half_add h1(.A(A),.B(B),.S(x),.C(y));
   half_add h2(.A(x),.B(Cin),.S(sum),.C(z));
-  or(Cout,y,z); 
+
 endmodule
 module half_add(
    input A,
@@ -16,4 +16,5 @@ module half_add(
   output C);
    xor(S,A,B);
    and(C,A,B);
+    or(Cout,y,z); 
  endmodule
