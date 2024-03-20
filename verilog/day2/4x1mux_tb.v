@@ -4,8 +4,8 @@ module mux4to1_tb;
   wire Y;
   mux4to1 mm(.D0(D0),.D1(D1),.D2(D2),.D3(D3),.S0(S0),.S1(S1),.Y(Y));
   initial  begin
-    $dumpfile("mux2to1.vcd");
-    $dumpvars(0,mux2to1_tb);
+    $dumpfile("mux4to1.vcd");
+    $dumpvars(0,mux4to1_tb);
   end
   initial begin
     D0=2'B00;D1=2'B01;D2=2'B11;D3=2'B11;
