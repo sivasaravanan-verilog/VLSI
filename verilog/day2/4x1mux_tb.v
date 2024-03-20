@@ -1,8 +1,8 @@
-module mux2to1_tb;
+module mux4to1_tb;
   reg D0,D1,D2,D3;
   reg S0,S1;
   wire Y;
-  mux2to1 mm(.D0(D0),.D1(D1),.D2(D2),.D3(D3),.S0(S0),.S1(S1),.Y(Y));
+  mux4to1 mm(.D0(D0),.D1(D1),.D2(D2),.D3(D3),.S0(S0),.S1(S1),.Y(Y));
   initial  begin
     $dumpfile("mux2to1.vcd");
     $dumpvars(0,mux2to1_tb);
