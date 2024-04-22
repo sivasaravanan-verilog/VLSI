@@ -1,0 +1,36 @@
+module fa(input a, b, cin, output S, Cout);
+  assign S = a ^ b ^ cin;
+  assign Cout = (a & b) | (b & cin) | (a & cin);
+endmodule
+
+interface fa_int();
+  logic a,b,cin;
+  logic S,Cout;
+endinterface
+
+
+
+
+
+
+module tb_top;
+  fa_int intf();
+  
+  fa(.a(intf.a),
+     .b(intf.b),
+     .cin(intf.cin),
+     .S(intf.S),
+     .Cout(intf.Cout));
+  
+  initial begin
+    $monitor("time=%0t: intf.a=%b intf.b=%b, intf.cin=%b, sum=%b, carry=%b",$time, intf.a,intf.b,intf.cin,intf.S,intf.Cout);
+    intf.a = 0; intf.b = 0; intf.cin = 0; #1;
+    intf.a = 0; intf.b = 0; intf.cin = 1; #1;
+    intf.a = 0; intf.b = 1; intf.cin = 0; #1;
+    intf.a = 0; intf.b = 1; intf.cin = 1; #1;
+    intf.a = 1; intf.b = 0; intf.cin = 0; #1;
+    intf.a = 1; intf.b = 0; intf.cin = 1; #1;
+    intf.a = 1; intf.b = 1; intf.cin = 0; #1;
+    intf.a = 1; intf.b = 1; intf.cin = 1;
+  end
+endmodule
