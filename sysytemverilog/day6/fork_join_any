@@ -1,0 +1,26 @@
+module fork_join_none;
+  initial begin;
+    fork
+      begin
+        $display($time, "\process 1 started");
+   
+        $display($time, "\process 2 started");
+        
+      end
+      
+      begin
+        #5
+        $display($time, "\process 1 finished");
+        
+        #10
+        $display($time, "\process 2 finished");
+      end
+    
+    join_any
+    
+    $display($time, "\after fork_join_any ........");
+  end
+endmodule
+    
+        
+  
